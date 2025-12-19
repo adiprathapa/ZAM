@@ -61,12 +61,13 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
     // Retry Logic with Model Fallback
     // User confirmed access to gemini-2.5-flash
     const modelsToTry = [
-        'gemini-2.0-flash-exp',
+        'gemini-2.5-flash',
+        'gemini-2.5-pro',
         'gemini-2.0-flash',
-        'gemini-1.5-flash',
-        'gemini-1.5-pro'
+        'gemini-1.5-flash'
     ];
     let lastError;
+    let successfulModel = null;
 
     for (const modelName of modelsToTry) {
         let retries = 2; // Retry per model
