@@ -54,6 +54,7 @@ app.get('/api/health', (req, res) => {
         database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
         readyState: mongoose.connection.readyState,
         hasUri: !!process.env.MONGODB_URI,
+        error: lastConnectError,
         env: process.env.NODE_ENV
     });
 });
