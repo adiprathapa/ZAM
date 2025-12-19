@@ -688,3 +688,54 @@ button {
     margin-bottom: 1.5rem;
   }
 }
+/* Pitch Deck Export Section */
+.export-section {
+    margin-top: 2rem;
+    background: #f8fafc !important;
+    border: 1px dashed #cbd5e1 !important;
+}
+
+.export-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.section-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem !important;
+}
+
+.export-preview {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Scale the 800px chart to fit in the UI container while keeping aspect ratio */
+.export-preview .pitch-deck-container {
+    transform: scale(0.85);
+    transform-origin: center top;
+    margin-bottom: -60px; /* Offset the scale transform empty space */
+}
+
+@media (max-width: 900px) {
+    .export-preview .pitch-deck-container {
+        transform: scale(0.6);
+        margin-bottom: -150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .export-preview .pitch-deck-container {
+        transform: scale(0.4);
+        margin-bottom: -240px;
+    }
+}

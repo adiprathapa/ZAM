@@ -6,6 +6,8 @@ import { calculateTopDown, formatCurrency } from './services/calculationEngine';
 import { fetchIndustries } from './services/referenceData';
 import { generateMarketNarrative } from './services/aiService';
 import { saveAnalysis } from './services/analysisService';
+import { toPng } from 'html-to-image';
+import PitchDeckChart from './components/PitchDeckChart';
 
 function App() {
   const [view, setView] = useState('dashboard'); // 'dashboard', 'wizard', 'results'
@@ -109,6 +111,22 @@ function App() {
       setIsAnalyzing(false);
       setView('results'); // REVEAL RESULTS ONLY NOW
     }
+  };
+
+  const handleExportImage = () => {
+    const node = document.getElementById('pitch-deck-export');
+    if (!node) return;
+
+    toPng(node, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = `ZAM-Market-Analysis-${finalData?.productName || 'Analysis'}.png`;
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.error('oops, something went wrong!', err);
+      });
   };
 
   const handleSavePortfolio = async () => {
@@ -250,6 +268,24 @@ function App() {
                           <ul>
                             {aiAnalysis.risks?.map((r, i) => <li key={i}>{r}</li>)}
                           </ul>
+                        </div>
+                      </div>
+
+                      {/* 3. Pitch Deck Visual Export */}
+                      <div className="report-card primary export-section">
+                        <div className="export-header">
+                          <h3>Pitch Deck Visual</h3>
+                          <button className="btn-secondary" onClick={handleExportImage}>
+                            📥 Download Image
+                          </button>
+                        </div>
+                        <p className="section-note">High-resolution target chart for your investor presentations.</p>
+
+                        <div className="export-preview">
+                          <PitchDeckChart
+                            metrics={metrics}
+                            productName={finalData?.productName}
+                          />
                         </div>
                       </div>
                     </div>
