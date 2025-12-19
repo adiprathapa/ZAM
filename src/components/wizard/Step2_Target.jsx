@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
-import { fetchIndustries, fetchConstants } from '../../services/referenceData';
+import { fetchIndustries, fetchConstants, SEED_INDUSTRIES, SEED_CONSTANTS } from '../../services/referenceData';
 
 const Step2_Target = ({ data, updateData }) => {
-    const [industries, setIndustries] = useState([]);
-    const [customerTypes, setCustomerTypes] = useState([]);
-    const [geographies, setGeographies] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [industries, setIndustries] = useState(SEED_INDUSTRIES.map(ind => ({ value: ind.key, label: ind.name, ...ind })));
+    const [customerTypes, setCustomerTypes] = useState(SEED_CONSTANTS.CUSTOMER_TYPES);
+    const [geographies, setGeographies] = useState(SEED_CONSTANTS.GEOGRAPHIES);
+    const [loading, setLoading] = useState(false); // No longer purely "loading" as we have seeds
 
     useEffect(() => {
         const loadData = async () => {
