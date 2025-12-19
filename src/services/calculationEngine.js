@@ -98,6 +98,7 @@ export function calculateTopDown(inputs, industryData) {
  * Format large currency numbers (e.g. $1.5B)
  */
 export const formatCurrency = (value) => {
+    if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
     if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
     if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
     return `$${Math.round(value).toLocaleString()}`;
