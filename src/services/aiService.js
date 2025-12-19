@@ -114,7 +114,7 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
             marketReach: 20,
             marketShare: 2
         },
-        executiveSummary: "⚠️ [DEMO MODE] The AI API Key (gemini-1.5-flash) returned a 404 error. This usually means the 'Generative Language API' is not enabled in your Google Cloud Console.",
+        executiveSummary: `⚠️ [DEMO MODE] The AI encountered an error: ${lastError?.message || 'Unknown Error'}. Please check your Google Cloud Console to ensure the 'Generative Language API' is enabled and your API Key is valid.`,
         marketDrivers: [
             "Demonstration Driver 1: Cloud Adoption",
             "Demonstration Driver 2: AI Integration",
