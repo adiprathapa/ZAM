@@ -59,50 +59,47 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
   `;
 
     // Retry Logic with Model Fallback
-    // User confirmed access to gemini-2.5-flash
     const modelsToTry = [
         'gemini-2.5-flash',
         'gemini-2.5-pro',
         'gemini-2.0-flash',
         'gemini-1.5-flash'
     ];
-    let lastError;
-    let successfulModel = null;
+    let errors = [];
 
     for (const modelName of modelsToTry) {
-        let retries = 2; // Retry per model
-        while (retries > 0) {
+        let retries = 1; // Faster cycling
+        while (retries >= 0) {
             try {
-                console.log(`🤖 Attempting AI with model: ${modelName}`);
-                const model = genAI.getGenerativeModel({ model: modelName });
+                console.log(`🤖 Attempting AI with model: ${modelName} (v1beta)`);
+                // Forcing v1beta for newest models
+                const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1beta' });
 
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
                 const text = response.text();
 
-                // Clean Markdown formatting if present
                 const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
-
                 return JSON.parse(jsonStr);
 
             } catch (error) {
                 console.warn(`AI Failed (${modelName}):`, error.message);
-                lastError = error;
+                errors.push(`${modelName}: ${error.message}`);
 
-                // If the model itself is not found (404), do not retry this model, switch to next.
                 if (error.message.includes('404') || error.message.includes('not found')) {
-                    break;
+                    break; // Move to next model
                 }
 
                 if (error.message.includes('429')) {
-                    await delay(2000); // Wait for rate limit
+                    await delay(1000);
                 }
 
                 retries--;
-                await delay(1000);
             }
         }
     }
+
+    const lastError = errors[0]; // Show the error from the first (most desired) model
 
     // FALLBACK: If all AI attempts fail, return a Mock/Demo response so the user isn't stuck.
     console.warn("⚠️ All AI models failed. Switching to DEMO MODE.");
