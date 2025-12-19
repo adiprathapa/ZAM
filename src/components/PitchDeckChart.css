@@ -28,8 +28,9 @@
 
 .hexagon {
     position: absolute;
-    width: 320px;
-    height: 360px;
+    width: 300px;
+    /* Slightly smaller for better fit */
+    height: 340px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,24 +42,26 @@
 }
 
 .tam-hex {
-    background: #4C1D95;
-    /* Deep Purple */
-    transform: translateX(140px);
+    background: #182A35;
+    /* Insight Navy */
+    transform: translateX(190px);
+    /* Increased spacing */
     z-index: 1;
     opacity: 0.9;
 }
 
 .sam-hex {
-    background: #7C3AED;
-    /* Purple */
+    background: #3B5466;
+    /* Intermediate Blue */
     transform: translateX(0px);
     z-index: 2;
 }
 
 .som-hex {
-    background: #DB2777;
-    /* Bright Pink */
-    transform: translateX(-140px);
+    background: #FF531B;
+    /* Insight Orange */
+    transform: translateX(-190px);
+    /* Increased spacing */
     z-index: 3;
 }
 
@@ -72,24 +75,24 @@
 }
 
 .hex-label {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 900;
     letter-spacing: 0.1em;
     margin-bottom: 5px;
 }
 
 .hex-title {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     opacity: 0.8;
     line-height: 1.2;
 }
 
 .hex-value {
-    font-size: 2.4rem;
+    font-size: 2.1rem;
     font-weight: 800;
     font-family: 'Playfair Display', serif;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

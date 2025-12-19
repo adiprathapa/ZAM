@@ -33,7 +33,7 @@ const PitchDeckChart = ({ metrics, productName }) => {
                     </div>
                 </div>
             </div>
-            <div className="chart-branding">ZAM Market Analysis • VC-Grade Precision</div>
+            <div className="chart-branding">ZAM Market Analysis</div>
         </div>
     );
 };
