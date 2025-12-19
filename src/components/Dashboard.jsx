@@ -10,8 +10,7 @@ const Dashboard = ({ onNewAnalysis, onViewAnalysis }) => {
     const [deleteConfirm, setDeleteConfirm] = useState(null); // { id, name }
 
     useEffect(() => {
-        // loadAnalyses(); // TEMPORARILY DISABLED FOR DIAGNOSTICS
-        setLoading(false); // Force skip loading
+        loadAnalyses();
     }, []);
 
     const loadAnalyses = async () => {
