@@ -780,3 +780,36 @@ button {
   color: var(--primary-color);
   font-weight: bold;
 }
+/* Global Branded List Styling */
+.zam-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.zam-list li {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.zam-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1;
+  top: 0.2rem;
+}
+
+/* Specific overrides for Logic section to use Playfair */
+.report-card.primary .zam-list li {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+}

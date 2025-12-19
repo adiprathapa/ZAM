@@ -13,178 +13,95 @@
     box-sizing: border-box;
     position: relative;
     border: 1px solid #eeeeee;
+    overflow: hidden;
 }
 
-.pitch-deck-header {
-    text-align: center;
-    width: 100%;
-}
-
-.pitch-deck-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    margin: 0;
-    color: #002b5b;
-    /* Navy */
-}
-
-.pitch-deck-header p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-top: 5px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.pitch-deck-container {
-    width: 800px;
-    height: 600px;
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-family: 'Inter', system-ui, sans-serif;
-    color: #1a1a1a;
-    border-radius: 12px;
-    box-sizing: border-box;
+.hexagonal-layout {
     position: relative;
-    border: 1px solid #eeeeee;
-}
-
-.target-visual {
-    position: relative;
-    width: 520px;
-    height: 520px;
+    width: 700px;
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
-.circle {
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
-.tam-circle {
-    width: 500px;
-    height: 500px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-}
-
-.sam-circle {
-    width: 380px;
-    height: 380px;
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-}
-
-.som-circle {
-    width: 240px;
-    height: 240px;
-    background: #002b5b;
-    /* Navy */
-    border: none;
-    box-shadow: 0 20px 40px rgba(0, 43, 91, 0.2);
-    flex-direction: column;
-}
-
-.circle-label {
+.hexagon {
     position: absolute;
+    width: 320px;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    padding: 20px;
+    filter: drop-shadow(-10px 0 10px rgba(0, 0, 0, 0.15));
+}
+
+.tam-hex {
+    background: #4C1D95;
+    /* Deep Purple */
+    transform: translateX(140px);
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.sam-hex {
+    background: #7C3AED;
+    /* Purple */
+    transform: translateX(0px);
+    z-index: 2;
+}
+
+.som-hex {
+    background: #DB2777;
+    /* Bright Pink */
+    transform: translateX(-140px);
+    z-index: 3;
+}
+
+.hex-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 100%;
-}
-
-.tam-label {
-    top: 30px;
-}
-
-.sam-label {
-    top: 35px;
-}
-
-.som-label {
-    position: relative;
     color: white;
+    width: 85%;
 }
 
-.label-name {
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #64748b;
-    margin-bottom: 4px;
+.hex-label {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
 }
 
-.som-label .label-name {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.label-value {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: #002b5b;
-    font-family: 'Playfair Display', serif;
-}
-
-.som-label .label-value {
-    color: white;
-    font-size: 2.25rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.pitch-deck-footer {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    width: 100%;
-    padding-top: 20px;
-    border-top: 1px solid #eeeeee;
-}
-
-.footer-metric {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.footer-metric strong {
-    font-size: 1.25rem;
-    color: #1a1a1a;
-}
-
-.footer-metric span {
+.hex-title {
     font-size: 0.8rem;
-    color: #666;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+    opacity: 0.8;
+    line-height: 1.2;
+}
+
+.hex-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .chart-branding {
     position: absolute;
-    bottom: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    bottom: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-}
-
-.powered-by {
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    font-size: 0.7rem;
-    color: #ccc;
-    font-weight: 600;
+    letter-spacing: 0.4em;
+    opacity: 0.6;
 }

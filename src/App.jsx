@@ -258,14 +258,12 @@ function App() {
 
                       <div className="report-grid">
                         <div className="report-card">
-                          <h4>Market Drivers</h4>
-                          <ul>
+                          <ul className="zam-list">
                             {aiAnalysis.marketDrivers?.map((d, i) => <li key={i}>{d}</li>)}
                           </ul>
                         </div>
                         <div className="report-card">
-                          <h4>Risk Factors</h4>
-                          <ul>
+                          <ul className="zam-list">
                             {aiAnalysis.risks?.map((r, i) => <li key={i}>{r}</li>)}
                           </ul>
                         </div>
@@ -307,7 +305,7 @@ function App() {
                 <section className="fine-tune-section">
                   <div className="report-card primary">
                     <h3>Calculation Logic</h3>
-                    <ul className="logic-list">
+                    <ul className="zam-list">
                       {logicSteps.map((step, i) => <li key={i}>{step}</li>)}
                     </ul>
                   </div>
