@@ -224,25 +224,22 @@ function App() {
               <WizardLayout onComplete={handleWizardComplete} />
             )}
 
-            {view === 'results' && (
-              // If AI returned a user-facing message (demo/mock due to API issues),
-              // show a simple screen asking the user to try again tomorrow instead
-              // of the full demo results screen.
-              aiAnalysis?.isMock && aiAnalysis?.userMessage ? (
-                <div className="simple-error-screen" style={{ padding: '4rem', textAlign: 'center' }}>
-                  <h2 style={{ color: '#dc2626', marginBottom: '1rem' }}>Google API Limit Reached</h2>
-                  <p style={{ color: '#334155', marginBottom: '1.5rem' }}>
-                    Google API limit has been reached. Please try again tomorrow.
-                  </p>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button className="btn-primary" onClick={() => {
-                      setAiAnalysis(null);
-                      setFinalData(null);
-                      setView('dashboard');
-                    }}>Back to Start</button>
-                  </div>
+            {view === 'ai-error' && (
+              <div className="api-error-screen" style={{ padding: '4rem', textAlign: 'center' }}>
+                <h2 style={{ color: '#dc2626', marginBottom: '1rem' }}>Google API Limit Reached</h2>
+                <p style={{ color: '#334155', marginBottom: '1.5rem' }}>{aiError || 'Google API limit has been reached. Please try again tomorrow.'}</p>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <button className="btn-primary" onClick={() => {
+                    setAiError(null);
+                    setAiAnalysis(null);
+                    setFinalData(null);
+                    setView('dashboard');
+                  }}>Back to Start</button>
                 </div>
-              ) : (
+              </div>
+            )}
+
+            {view === 'results' && (
                 <div className="results-container animate-fade-in">
                 <div className="results-actions" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                   <button className="btn-secondary" onClick={() => setView('dashboard')} style={{ marginRight: '1rem' }}>
@@ -434,9 +431,9 @@ function App() {
                   </div>
                 </section>
               </div>
-            ))
-}</>
-        )}
+            )}
+          </>
+        )
       </main>
     </div>
   );
