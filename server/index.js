@@ -18,17 +18,19 @@ app.use(cors());
 app.use(express.json());
 
 // Database Connection (Cached for Serverless)
-let cachedDb = null;
+let lastConnectError = null;
 
 const connectDB = async () => {
-    if (cachedDb) return cachedDb;
+    if (mongoose.connection.readyState === 1) return;
 
     try {
-        const db = await mongoose.connect(MONGODB_URI);
-        cachedDb = db;
+        await mongoose.connect(MONGODB_URI, {
+            serverSelectionTimeoutMS: 5000 // Timeout after 5s
+        });
         console.log('✅ MongoDB Connected');
-        return db;
+        lastConnectError = null;
     } catch (err) {
+        lastConnectError = err.message;
         console.error('❌ MongoDB Connection Error:', err);
     }
 };
