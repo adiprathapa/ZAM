@@ -61,6 +61,7 @@ function App() {
     setAiError(null);
     setAiAnalysis(null);
 
+    let redirectToStart = false;
     try {
       // 1. Fetch Industry Benchmarks for this calculation
       let industryData = null;
@@ -76,30 +77,45 @@ function App() {
       // We wait for this NOW so the UI doesn't transition until ready
       const aiResult = await generateMarketNarrative(data, result.metrics, result.logic);
 
-      setAiAnalysis(aiResult);
-
-      // 4. Update Estimates (AI Preferred, fallback to Local)
-      if (aiResult.suggestedAssumptions) {
-        console.log("AI Refined Assumptions:", aiResult.suggestedAssumptions);
-        const newAssumptions = {
-          avgPrice: aiResult.suggestedAssumptions.avgPrice || result.assumptions.avgPrice,
-          totalAddressableUsers: aiResult.suggestedAssumptions.totalAddressableUsers || result.assumptions.totalAddressableUsers,
-          marketReach: aiResult.suggestedAssumptions.marketReach || result.assumptions.marketReach,
-          marketShare: aiResult.suggestedAssumptions.marketShare || result.assumptions.marketShare
-        };
-        setAssumptions(newAssumptions);
-        setOriginalAssumptions(newAssumptions); // Store original for reset
-
-        setLogicSteps([
-          "AI Refined: Adjusting based on deep market analysis...",
-          ...result.logic
-        ]);
+      // If the AI service returned a demo/mock with a user-facing message
+      // (e.g., API quota/limit reached), show the message and redirect
+      // the user back to the dashboard/start screen instead of the
+      // demo results page.
+      if (aiResult?.isMock && aiResult?.userMessage) {
+        setAiError(aiResult.userMessage);
+        setAiAnalysis(null);
+        setFinalData(null);
+        // Reset to local fallback assumptions so the dashboard isn't left in a weird state
+        const fallbackResult = calculateTopDown(data, {});
+        setAssumptions(fallbackResult.assumptions);
+        setLogicSteps(fallbackResult.logic);
+        redirectToStart = true;
+        // Don't proceed with normal results flow; finally will handle the redirect.
       } else {
-        // Fallback to local if AI returns no numbers (unlikely with our prompt)
-        setAssumptions(result.assumptions);
-        setLogicSteps(result.logic);
-      }
+        setAiAnalysis(aiResult);
 
+        // 4. Update Estimates (AI Preferred, fallback to Local)
+        if (aiResult.suggestedAssumptions) {
+          console.log("AI Refined Assumptions:", aiResult.suggestedAssumptions);
+          const newAssumptions = {
+            avgPrice: aiResult.suggestedAssumptions.avgPrice || result.assumptions.avgPrice,
+            totalAddressableUsers: aiResult.suggestedAssumptions.totalAddressableUsers || result.assumptions.totalAddressableUsers,
+            marketReach: aiResult.suggestedAssumptions.marketReach || result.assumptions.marketReach,
+            marketShare: aiResult.suggestedAssumptions.marketShare || result.assumptions.marketShare
+          };
+          setAssumptions(newAssumptions);
+          setOriginalAssumptions(newAssumptions); // Store original for reset
+
+          setLogicSteps([
+            "AI Refined: Adjusting based on deep market analysis...",
+            ...result.logic
+          ]);
+        } else {
+          // Fallback to local if AI returns no numbers (unlikely with our prompt)
+          setAssumptions(result.assumptions);
+          setLogicSteps(result.logic);
+        }
+      }
     } catch (err) {
       console.error("Analysis Failed:", err);
       setAiError(err.message || "Unknown error occurred");
@@ -109,7 +125,12 @@ function App() {
       setLogicSteps(fallbackResult.logic);
     } finally {
       setIsAnalyzing(false);
-      setView('results'); // REVEAL RESULTS ONLY NOW
+      // If we flagged a redirect due to API limits, go back to dashboard/start
+      if (redirectToStart) {
+        setView('dashboard');
+      } else {
+        setView('results'); // REVEAL RESULTS ONLY NOW
+      }
     }
   };
 
