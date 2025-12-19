@@ -101,17 +101,22 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
 
     const lastError = errors[0]; // Show the error from the first (most desired) model
 
-    // FALLBACK: If all AI attempts fail, return a Mock/Demo response so the user isn't stuck.
-    console.warn("All AI models failed. Switching to DEMO MODE.");
+    // FALLBACK: If all AI attempts fail, return a friendly user-facing message
+    // so the UI can show a simple instruction and avoid technical details.
+    console.warn("All AI models failed. Switching to DEMO MODE.", { errors });
     return {
         isMock: true, // Flag to show in UI
+        // A short message intended for end-users (non-technical)
+        userMessage: "Gemini is temporarily unavailable. Please try again tomorrow.",
+        // Keep a brief, non-technical executive summary for displays that expect it
+        executiveSummary: "Gemini is temporarily unavailable. Please try again tomorrow.",
+        // Provide a simple demo analysis so the UI remains functional
         suggestedAssumptions: {
             avgPrice: metrics.tam / 100000,
             totalAddressableUsers: metrics.tam / 500,
             marketReach: 20,
             marketShare: 2
         },
-        executiveSummary: `[DEMO MODE] The AI encountered an error. Please verify your API Key and Google Cloud configuration.`,
         marketDrivers: [
             "Demonstration Driver 1: Cloud Adoption",
             "Demonstration Driver 2: AI Integration",
@@ -123,6 +128,8 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
             "Check API Quotas"
         ],
         sanityCheck: "Demo",
-        sanityCheckReason: "This is a placeholder analysis because the live AI service is unreachable."
+        sanityCheckReason: "This is a placeholder analysis because the live AI service is unreachable.",
+        // Developer-only field: include the last error for debugging in logs (UI should ignore)
+        _debugError: lastError || errors.join(' | ')
     };
 }
