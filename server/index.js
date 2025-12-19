@@ -46,8 +46,14 @@ app.use('/api/constants', constantRoutes);
 app.use('/api/analyses', analysisRoutes);
 
 // Health Check
-app.get('/health', (req, res) => {
-    res.json({ status: 'ok', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+        readyState: mongoose.connection.readyState,
+        hasUri: !!process.env.MONGODB_URI,
+        env: process.env.NODE_ENV
+    });
 });
 
 // Root Route
