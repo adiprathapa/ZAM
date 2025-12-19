@@ -54,9 +54,33 @@ const Dashboard = ({ onNewAnalysis, onViewAnalysis }) => {
             {error && <div className="error-banner">{error}</div>}
 
             {analyses.length === 0 && !loading ? (
-                <div className="empty-state">
-                    <h3>No analyses yet.</h3>
-                    <p>Start a new market sizing analysis to see it here.</p>
+                <div className="empty-state-hero">
+                    <div className="hero-content">
+                        <div className="hero-icon">📈</div>
+                        <h3>Your Venture Portfolio is Empty</h3>
+                        <p>ZAM helps you map markets, size opportunities, and simulate growth with VC-grade precision.</p>
+                        <button className="btn-primary btn-large" onClick={onNewAnalysis}>
+                            Create Your First Analysis
+                        </button>
+                    </div>
+
+                    <div className="feature-previews">
+                        <div className="feature-preview-card">
+                            <span className="feature-icon">🔍</span>
+                            <h4>Market Mapping</h4>
+                            <p>Target specific industries and buyer personas with built-in reference data.</p>
+                        </div>
+                        <div className="feature-preview-card">
+                            <span className="feature-icon">⛓️</span>
+                            <h4>Top-Down Precision</h4>
+                            <p>Convert vague TAM estimates into concrete, actionable business targets.</p>
+                        </div>
+                        <div className="feature-preview-card">
+                            <span className="feature-icon">🤖</span>
+                            <h4>AI Analyst</h4>
+                            <p>Get instant qualitative reviews and risk assessments via Gemini 2.0.</p>
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <div className="analysis-grid">
