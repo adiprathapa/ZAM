@@ -61,7 +61,7 @@ function App() {
     setAiError(null);
     setAiAnalysis(null);
 
-    let redirectToStart = false;
+    let errorView = false;
     try {
       // 1. Fetch Industry Benchmarks for this calculation
       let industryData = null;
@@ -78,9 +78,8 @@ function App() {
       const aiResult = await generateMarketNarrative(data, result.metrics, result.logic);
 
       // If the AI service returned a demo/mock with a user-facing message
-      // (e.g., API quota/limit reached), show the message and redirect
-      // the user back to the dashboard/start screen instead of the
-      // demo results page.
+      // (e.g., API quota/limit reached), show the message in a dedicated
+      // error view so the user does not land on the demo results screen.
       if (aiResult?.isMock && aiResult?.userMessage) {
         setAiError(aiResult.userMessage);
         setAiAnalysis(null);
@@ -89,8 +88,7 @@ function App() {
         const fallbackResult = calculateTopDown(data, {});
         setAssumptions(fallbackResult.assumptions);
         setLogicSteps(fallbackResult.logic);
-        redirectToStart = true;
-        // Don't proceed with normal results flow; finally will handle the redirect.
+        errorView = true;
       } else {
         setAiAnalysis(aiResult);
 
@@ -125,9 +123,9 @@ function App() {
       setLogicSteps(fallbackResult.logic);
     } finally {
       setIsAnalyzing(false);
-      // If we flagged a redirect due to API limits, go back to dashboard/start
-      if (redirectToStart) {
-        setView('dashboard');
+      // If we flagged an error view due to API limits, show the dedicated error screen
+      if (errorView) {
+        setView('ai-error');
       } else {
         setView('results'); // REVEAL RESULTS ONLY NOW
       }
@@ -436,8 +434,8 @@ function App() {
                   </div>
                 </section>
               </div>
-            )}
-          </>
+            ))
+}</>
         )}
       </main>
     </div>
