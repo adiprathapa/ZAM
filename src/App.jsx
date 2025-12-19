@@ -240,9 +240,9 @@ function App() {
                   <div className="section-header">
                     <h2>AI Market Analyst</h2>
                     {aiAnalysis?.isMock ? (
-                      <span className="badge" style={{ background: '#f59e0b', color: '#fff' }}>⚠️ Demo Mode (API Error)</span>
+                      <span className="badge" style={{ background: '#f59e0b', color: '#fff' }}>Demo Mode (API Error)</span>
                     ) : (
-                      <span className="badge" style={{ background: '#10b981', color: '#fff' }}>● Live Analysis</span>
+                      <span className="badge" style={{ background: '#10b981', color: '#fff' }}>Live Analysis</span>
                     )}
                   </div>
 
@@ -276,7 +276,7 @@ function App() {
                         <div className="export-header">
                           <h3>Pitch Deck Visual</h3>
                           <button className="btn-secondary" onClick={handleExportImage}>
-                            📥 Download Image
+                            Download Image
                           </button>
                         </div>
                         <p className="section-note">High-resolution target chart for your investor presentations.</p>
@@ -291,7 +291,7 @@ function App() {
                     </div>
                   ) : (
                     <div className="error-box">
-                      <p className="error-text">❌ Analysis unavailable.</p>
+                      <p className="error-text">Analysis unavailable.</p>
                       {aiError && (
                         <div style={{ color: '#ef4444', marginTop: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', padding: '0.5rem', borderRadius: '4px' }}>
                           <strong>Error Details:</strong> {aiError}
@@ -358,6 +358,15 @@ function App() {
                         style={{ width: '150px', textAlign: 'right' }}
                       />
                     </div>
+                    <input
+                      type="range"
+                      name="marketReach"
+                      min="1"
+                      max="100"
+                      step="1"
+                      value={assumptions.marketReach}
+                      onChange={handleSliderChange}
+                    />
                   </div>
 
                   <div className="slider-group">
@@ -375,6 +384,15 @@ function App() {
                         style={{ width: '150px', textAlign: 'right' }}
                       />
                     </div>
+                    <input
+                      type="range"
+                      name="marketShare"
+                      min="0.1"
+                      max="50"
+                      step="0.1"
+                      value={assumptions.marketShare}
+                      onChange={handleSliderChange}
+                    />
                   </div>
                 </section>
               </div>

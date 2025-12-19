@@ -5,13 +5,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 40px;
+    justify-content: center;
+    padding: 0;
     font-family: 'Inter', system-ui, sans-serif;
     color: #1a1a1a;
     border-radius: 12px;
     box-sizing: border-box;
-    /* Use a solid border for the image capture */
+    position: relative;
     border: 1px solid #eeeeee;
 }
 
@@ -38,12 +38,11 @@
 
 .target-visual {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0;
 }
 
 .circle {
@@ -52,52 +51,79 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    box-sizing: border-box;
 }
 
 .tam-circle {
-    width: 400px;
-    height: 400px;
-    background: rgba(0, 43, 91, 0.05);
-    border: 2px solid #002b5b;
+    width: 500px;
+    height: 500px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
 }
 
 .sam-circle {
-    width: 280px;
-    height: 280px;
-    background: rgba(0, 43, 91, 0.1);
-    border: 2px solid #002b5b;
+    width: 360px;
+    height: 360px;
+    background: #f1f5f9;
+    border: 2px solid #cbd5e1;
 }
 
 .som-circle {
-    width: 160px;
-    height: 160px;
+    width: 220px;
+    height: 220px;
     background: #ff4e00;
     /* ZAM Orange */
     border: none;
-    box-shadow: 0 10px 20px rgba(255, 78, 0, 0.2);
+    box-shadow: 0 15px 30px rgba(255, 78, 0, 0.25);
+    flex-direction: column;
 }
 
 .circle-label {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.tam-label {
+    top: 25px;
+}
+
+.sam-label {
+    top: 25px;
+}
+
+.som-label {
+    position: relative;
+    /* Centered inside its circle */
+    color: white;
+}
+
+.label-name {
+    font-size: 0.8rem;
     font-weight: 700;
-    font-size: 0.9rem;
-    white-space: nowrap;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 2px;
 }
 
-.circle-label.top {
-    top: -30px;
+.som-label .label-name {
+    opacity: 0.9;
+}
+
+.label-value {
+    font-size: 1.5rem;
+    font-weight: 800;
     color: #002b5b;
+    /* Navy */
+    font-family: 'Playfair Display', serif;
 }
 
-.circle-label.middle {
-    top: -25px;
-    color: #002b5b;
-}
-
-.circle-label.bottom {
-    bottom: -35px;
-    color: #ff4e00;
-    font-size: 1.1rem;
+.som-label .label-value {
+    color: white;
+    font-size: 1.8rem;
 }
 
 .pitch-deck-footer {
@@ -124,6 +150,16 @@
     font-size: 0.8rem;
     color: #666;
     text-transform: uppercase;
+}
+
+.chart-branding {
+    position: absolute;
+    bottom: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
 }
 
 .powered-by {

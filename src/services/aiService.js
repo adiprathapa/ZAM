@@ -102,7 +102,7 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
     const lastError = errors[0]; // Show the error from the first (most desired) model
 
     // FALLBACK: If all AI attempts fail, return a Mock/Demo response so the user isn't stuck.
-    console.warn("⚠️ All AI models failed. Switching to DEMO MODE.");
+    console.warn("All AI models failed. Switching to DEMO MODE.");
     return {
         isMock: true, // Flag to show in UI
         suggestedAssumptions: {
@@ -111,7 +111,7 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
             marketReach: 20,
             marketShare: 2
         },
-        executiveSummary: `⚠️ [DEMO MODE] The AI encountered an error. Please verify your API Key and Google Cloud configuration.`,
+        executiveSummary: `[DEMO MODE] The AI encountered an error. Please verify your API Key and Google Cloud configuration.`,
         marketDrivers: [
             "Demonstration Driver 1: Cloud Adoption",
             "Demonstration Driver 2: AI Integration",
