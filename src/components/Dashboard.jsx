@@ -44,12 +44,14 @@ const Dashboard = ({ onNewAnalysis, onViewAnalysis }) => {
 
     return (
         <div className="dashboard-container animate-fade-in">
-            <header className="dashboard-header">
-                <h2>My Venture Portfolio</h2>
-                <button className="btn-primary" onClick={onNewAnalysis}>
-                    + New Analysis
-                </button>
-            </header>
+            {analyses.length > 0 && (
+                <header className="dashboard-header">
+                    <h2>My Venture Portfolio</h2>
+                    <button className="btn-primary" onClick={onNewAnalysis}>
+                        + New Analysis
+                    </button>
+                </header>
+            )}
 
             {error && <div className="error-banner">{error}</div>}
 
