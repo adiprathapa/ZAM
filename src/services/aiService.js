@@ -111,7 +111,7 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
             marketReach: 20,
             marketShare: 2
         },
-        executiveSummary: `⚠️ [DEMO MODE] AI Failed. Errors: ${errors.join(' | ')}. Please check Google Cloud Console and API Key permissions.`,
+        executiveSummary: `⚠️ [DEMO MODE] The AI encountered an error. Please verify your API Key and Google Cloud configuration.`,
         marketDrivers: [
             "Demonstration Driver 1: Cloud Adoption",
             "Demonstration Driver 2: AI Integration",
