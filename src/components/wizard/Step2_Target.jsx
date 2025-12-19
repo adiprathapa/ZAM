@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { fetchIndustries, fetchConstants, SEED_INDUSTRIES, SEED_CONSTANTS } from '../../services/referenceData';
 
 const Step2_Target = ({ data, updateData }) => {
