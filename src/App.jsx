@@ -164,7 +164,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1 onClick={() => setView('dashboard')} style={{ cursor: 'pointer' }}>ZAM</h1>
-        <p>Data-Driven Market Sizing Copilot</p>
+        <p>Data-Driven Market Sizing Copilot <span style={{ fontSize: '0.7rem', opacity: 0.5 }}>(v2.5.2-live)</span></p>
       </header>
 
       <main className="app-main">

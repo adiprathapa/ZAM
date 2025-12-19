@@ -111,7 +111,7 @@ export async function generateMarketNarrative(formData, metrics, logicSteps) {
             marketReach: 20,
             marketShare: 2
         },
-        executiveSummary: `⚠️ [DEMO MODE] The AI encountered an error: ${lastError?.message || 'Unknown Error'}. Please check your Google Cloud Console to ensure the 'Generative Language API' is enabled and your API Key is valid.`,
+        executiveSummary: `⚠️ [DEMO MODE] AI Failed. Errors: ${errors.join(' | ')}. Please check Google Cloud Console and API Key permissions.`,
         marketDrivers: [
             "Demonstration Driver 1: Cloud Adoption",
             "Demonstration Driver 2: AI Integration",
