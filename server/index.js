@@ -33,9 +33,9 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
 });
 
-// Root Route (to prevent "Cannot GET /" confusion)
+// Root Route
 app.get('/', (req, res) => {
-    res.send('✅ ZAM API Server is Running. Go to http://localhost:5173 to use the app.');
+    res.send('✅ ZAM API Server is Running. Frontend is hosted on GitHub Pages.');
 });
 
 // Start Server
