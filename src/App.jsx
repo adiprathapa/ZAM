@@ -209,7 +209,7 @@ function App() {
               <div className="results-container animate-fade-in">
                 <div className="results-actions" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                   <button className="btn-secondary" onClick={() => setView('dashboard')} style={{ marginRight: '1rem' }}>
-                    &larr; Back to Dashboard
+                    Back to Dashboard
                   </button>
                   <button className="btn-primary" onClick={handleSavePortfolio} disabled={isSaving}>
                     {isSaving ? 'Saving...' : 'Save to Portfolio'}
@@ -305,94 +305,97 @@ function App() {
 
                 {/* 3. Logic & Fine Tuning */}
                 <section className="fine-tune-section">
-                  <div className="logic-block">
-                    <h4>Calculation Logic</h4>
+                  <div className="report-card primary">
+                    <h3>Calculation Logic</h3>
                     <ul className="logic-list">
                       {logicSteps.map((step, i) => <li key={i}>{step}</li>)}
                     </ul>
                   </div>
 
-                  <h3>Fine Tune Assumptions</h3>
+                  <div className="report-card">
+                    <h3>Fine Tune Assumptions</h3>
+                    <p className="section-note">Adjust these parameters to see real-time impact on market sizing.</p>
 
-                  <div className="slider-group">
-                    <div className="slider-header">
-                      <label>Average Price / ACV ({formatCurrency(assumptions.avgPrice)})</label>
-                      <input
-                        type="number"
-                        name="avgPrice"
-                        min="1"
-                        value={assumptions.avgPrice}
-                        onChange={handleSliderChange}
-                        className="form-input"
-                        style={{ width: '150px', textAlign: 'right' }}
-                      />
+                    <div className="slider-group">
+                      <div className="slider-header">
+                        <label>Average Price / ACV ({formatCurrency(assumptions.avgPrice)})</label>
+                        <input
+                          type="number"
+                          name="avgPrice"
+                          min="1"
+                          value={assumptions.avgPrice}
+                          onChange={handleSliderChange}
+                          className="form-input"
+                          style={{ width: '150px', textAlign: 'right' }}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="slider-group">
-                    <div className="slider-header">
-                      <label>Total Market Users</label>
-                      <input
-                        type="number"
-                        name="totalAddressableUsers"
-                        min="1000"
-                        value={assumptions.totalAddressableUsers}
-                        onChange={handleSliderChange}
-                        className="form-input"
-                        style={{ width: '150px', textAlign: 'right' }}
-                      />
+                    <div className="slider-group">
+                      <div className="slider-header">
+                        <label>Total Market Users</label>
+                        <input
+                          type="number"
+                          name="totalAddressableUsers"
+                          min="1000"
+                          value={assumptions.totalAddressableUsers}
+                          onChange={handleSliderChange}
+                          className="form-input"
+                          style={{ width: '150px', textAlign: 'right' }}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="slider-group">
-                    <div className="slider-header">
-                      <label>Market Reach (SAM %)</label>
+                    <div className="slider-group">
+                      <div className="slider-header">
+                        <label>Market Reach (SAM %)</label>
+                        <input
+                          type="number"
+                          name="marketReach"
+                          min="1"
+                          max="100"
+                          value={assumptions.marketReach}
+                          onChange={handleSliderChange}
+                          className="form-input"
+                          style={{ width: '150px', textAlign: 'right' }}
+                        />
+                      </div>
                       <input
-                        type="number"
+                        type="range"
                         name="marketReach"
                         min="1"
                         max="100"
+                        step="1"
                         value={assumptions.marketReach}
                         onChange={handleSliderChange}
-                        className="form-input"
-                        style={{ width: '150px', textAlign: 'right' }}
                       />
                     </div>
-                    <input
-                      type="range"
-                      name="marketReach"
-                      min="1"
-                      max="100"
-                      step="1"
-                      value={assumptions.marketReach}
-                      onChange={handleSliderChange}
-                    />
-                  </div>
 
-                  <div className="slider-group">
-                    <div className="slider-header">
-                      <label>Market Share (SOM %)</label>
+                    <div className="slider-group">
+                      <div className="slider-header">
+                        <label>Market Share (SOM %)</label>
+                        <input
+                          type="number"
+                          name="marketShare"
+                          min="0.1"
+                          max="100"
+                          step="0.1"
+                          value={assumptions.marketShare}
+                          onChange={handleSliderChange}
+                          className="form-input"
+                          style={{ width: '150px', textAlign: 'right' }}
+                        />
+                      </div>
                       <input
-                        type="number"
+                        type="range"
                         name="marketShare"
                         min="0.1"
-                        max="100"
+                        max="50"
                         step="0.1"
                         value={assumptions.marketShare}
                         onChange={handleSliderChange}
-                        className="form-input"
-                        style={{ width: '150px', textAlign: 'right' }}
                       />
                     </div>
-                    <input
-                      type="range"
-                      name="marketShare"
-                      min="0.1"
-                      max="50"
-                      step="0.1"
-                      value={assumptions.marketShare}
-                      onChange={handleSliderChange}
-                    />
                   </div>
                 </section>
               </div>

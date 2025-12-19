@@ -48,7 +48,6 @@ const Step3_GTM = ({ data, updateData }) => {
                 <div className="form-group half">
                     <label htmlFor="churnRate">
                         Expected Annual Churn (%)
-                        <span className="tooltip" title="% of revenue lost each year">ⓘ</span>
                     </label>
                     <input
                         type="number"
@@ -66,7 +65,6 @@ const Step3_GTM = ({ data, updateData }) => {
                 <div className="form-group half">
                     <label htmlFor="expansionRate">
                         Expansion Revenue (%)
-                        <span className="tooltip" title="% revenue growth from existing customers (upsell)">ⓘ</span>
                     </label>
                     <input
                         type="number"

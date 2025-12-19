@@ -91,7 +91,6 @@ const Step1_Product = ({ data, updateData }) => {
                 <div className="form-group half">
                     <label htmlFor="acv">
                         Average Contract Value (Annual $)
-                        <span className="tooltip" title="Estimated annual revenue per customer">ⓘ</span>
                     </label>
                     <input
                         type="number"

@@ -74,13 +74,13 @@ const WizardLayout = ({ onComplete }) => {
             <div className="wizard-actions">
                 {currentStep > 1 && (
                     <button className="btn-secondary" onClick={prevStep}>
-                        ← Back
+                        Back
                     </button>
                 )}
 
                 {currentStep < 4 ? (
                     <button className="btn-primary" onClick={nextStep}>
-                        Next Step →
+                        Next Step
                     </button>
                 ) : (
                     <button className="btn-primary btn-analyze" onClick={handleComplete}>
