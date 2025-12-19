@@ -327,15 +327,6 @@ function App() {
                         style={{ width: '150px', textAlign: 'right' }}
                       />
                     </div>
-                    <input
-                      type="range"
-                      name="avgPrice"
-                      min="1"
-                      max={Math.max(5000, assumptions.avgPrice * 2)}
-                      step="1"
-                      value={assumptions.avgPrice}
-                      onChange={handleSliderChange}
-                    />
                   </div>
 
                   <div className="slider-group">
@@ -351,47 +342,39 @@ function App() {
                         style={{ width: '150px', textAlign: 'right' }}
                       />
                     </div>
-                    <input
-                      type="range"
-                      name="totalAddressableUsers"
-                      min="1000"
-                      max={Math.max(10000000, assumptions.totalAddressableUsers * 2)}
-                      step="1000"
-                      value={assumptions.totalAddressableUsers}
-                      onChange={handleSliderChange}
-                    />
                   </div>
 
                   <div className="slider-group">
                     <div className="slider-header">
                       <label>Market Reach (SAM %)</label>
-                      <span>{assumptions.marketReach}%</span>
+                      <input
+                        type="number"
+                        name="marketReach"
+                        min="1"
+                        max="100"
+                        value={assumptions.marketReach}
+                        onChange={handleSliderChange}
+                        className="form-input"
+                        style={{ width: '150px', textAlign: 'right' }}
+                      />
                     </div>
-                    <input
-                      type="range"
-                      name="marketReach"
-                      min="1"
-                      max="100"
-                      step="1"
-                      value={assumptions.marketReach}
-                      onChange={handleSliderChange}
-                    />
                   </div>
 
                   <div className="slider-group">
                     <div className="slider-header">
                       <label>Market Share (SOM %)</label>
-                      <span>{assumptions.marketShare}%</span>
+                      <input
+                        type="number"
+                        name="marketShare"
+                        min="0.1"
+                        max="100"
+                        step="0.1"
+                        value={assumptions.marketShare}
+                        onChange={handleSliderChange}
+                        className="form-input"
+                        style={{ width: '150px', textAlign: 'right' }}
+                      />
                     </div>
-                    <input
-                      type="range"
-                      name="marketShare"
-                      min="0.1"
-                      max="50" // Increased from 20 to 50 for more flexibility
-                      step="0.1"
-                      value={assumptions.marketShare}
-                      onChange={handleSliderChange}
-                    />
                   </div>
                 </section>
               </div>
