@@ -17,10 +17,27 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/zam';
 app.use(cors());
 app.use(express.json());
 
-// Database Connection
-mongoose.connect(MONGODB_URI)
-    .then(() => console.log('✅ MongoDB Connected'))
-    .catch(err => console.error('❌ MongoDB Connection Error:', err));
+// Database Connection (Cached for Serverless)
+let cachedDb = null;
+
+const connectDB = async () => {
+    if (cachedDb) return cachedDb;
+
+    try {
+        const db = await mongoose.connect(MONGODB_URI);
+        cachedDb = db;
+        console.log('✅ MongoDB Connected');
+        return db;
+    } catch (err) {
+        console.error('❌ MongoDB Connection Error:', err);
+    }
+};
+
+// Middleware to ensure DB is connected
+app.use(async (req, res, next) => {
+    await connectDB();
+    next();
+});
 
 // Routes
 app.use('/api/industries', industryRoutes);
