@@ -172,7 +172,7 @@ function App() {
           <div className="loading-overlay">
             <div className="loading-spinner"></div>
             <div className="loading-text">Analyzing market data...</div>
-            <div style={{ marginTop: '10px', color: '#94a3b8' }}>Consulting Gemini 2.5 Flash</div>
+            <div style={{ marginTop: '10px', color: '#94a3b8' }}>Consulting Gemini Flash</div>
           </div>
         ) : (
           <>
