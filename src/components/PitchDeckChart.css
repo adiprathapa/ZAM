@@ -39,33 +39,28 @@
     width: 480px;
     height: 540px;
     background: #2c3e50;
-    transform: translateX(70px);
+    transform: translateX(50px);
     z-index: 1;
     align-items: center;
     justify-content: flex-end;
     padding-right: 30px;
 }
 
-/* SAM border - dark hexagon behind white SAM */
+/* SAM border - hidden */
 .sam-hex-border {
-    position: absolute;
-    width: 366px;
-    height: 416px;
-    background: #2c3e50;
-    transform: translateX(13px);
-    z-index: 2;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: none;
 }
 
-/* SAM - Middle hexagon (white with border effect) */
+/* SAM - Middle hexagon (white) */
 .sam-hex {
     width: 360px;
     height: 410px;
     background: #ffffff !important;
-    transform: translateX(16px);
-    z-index: 3;
+    transform: translateX(-7px);
+    z-index: 2;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 40px;
 }
 
 /* SOM - Innermost hexagon (left/front) */
@@ -73,8 +68,8 @@
     width: 210px;
     height: 250px;
     background: #ff4e1b;
-    transform: translateX(-65px);
-    z-index: 4;
+    transform: translateX(-82px);
+    z-index: 3;
     align-items: center;
     justify-content: center;
 }
@@ -92,25 +87,25 @@
 }
 
 .hex-label {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-family: inherit;
 }
 
 .hex-title {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     opacity: 0.8;
     line-height: 1.2;
 }
 
 .hex-value {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
     font-family: inherit;
 }
@@ -119,7 +114,7 @@
     position: absolute;
     bottom: 20px;
     right: 25px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #cbd5e1;
     text-transform: uppercase;
