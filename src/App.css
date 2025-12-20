@@ -76,11 +76,22 @@
   margin-bottom: 2rem;
 }
 
+.slider-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
 .slider-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.75rem;
   font-weight: 500;
+}
+
+.slider-header .form-input {
+  font-size: 1rem;
 }
 
 input[type=range] {
@@ -797,7 +808,7 @@ button {
 }
 
 .section-note {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 2rem !important;
 }
