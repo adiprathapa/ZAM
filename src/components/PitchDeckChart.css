@@ -39,11 +39,11 @@
     width: 480px;
     height: 540px;
     background: #2c3e50;
-    transform: translateX(180px);
+    transform: translateX(70px);
     z-index: 1;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 35px;
+    padding-right: 30px;
 }
 
 /* SAM border - dark hexagon behind white SAM */
@@ -52,7 +52,7 @@
     width: 366px;
     height: 416px;
     background: #2c3e50;
-    transform: translateX(123px);
+    transform: translateX(13px);
     z-index: 2;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
@@ -62,11 +62,10 @@
     width: 360px;
     height: 410px;
     background: #ffffff !important;
-    transform: translateX(126px);
+    transform: translateX(16px);
     z-index: 3;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 25px;
+    justify-content: center;
 }
 
 /* SOM - Innermost hexagon (left/front) */
@@ -74,7 +73,7 @@
     width: 210px;
     height: 250px;
     background: #ff4e1b;
-    transform: translateX(45px);
+    transform: translateX(-65px);
     z-index: 4;
     align-items: center;
     justify-content: center;
