@@ -10,7 +10,7 @@ const PitchDeckChart = ({ metrics, productName }) => {
                 <div className="hexagon tam-hex">
                     <div className="hex-content">
                         <div className="hex-label">TAM</div>
-                        <div className="hex-title">Total Addressable Market</div>
+                        
                         <div className="hex-value">{formatCurrency(metrics.tam)}</div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@ const PitchDeckChart = ({ metrics, productName }) => {
                 <div className="hexagon sam-hex">
                     <div className="hex-content">
                         <div className="hex-label">SAM</div>
-                        <div className="hex-title">Serviceable Addressable Market</div>
+                       
                         <div className="hex-value">{formatCurrency(metrics.sam)}</div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ const PitchDeckChart = ({ metrics, productName }) => {
                 <div className="hexagon som-hex">
                     <div className="hex-content">
                         <div className="hex-label">SOM</div>
-                        <div className="hex-title">Serviceable Obtainable Market</div>
+                        
                         <div className="hex-value">{formatCurrency(metrics.som)}</div>
                     </div>
                 </div>
