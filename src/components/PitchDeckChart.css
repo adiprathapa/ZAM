@@ -37,14 +37,14 @@
 
 /* TAM - Outermost hexagon (right/back) */
 .tam-hex {
-    width: 500px;
-    height: 560px;
+    width: 580px;
+    height: 640px;
     background: #2c3e50;
-    transform: translateX(120px);
+    transform: translateX(160px);
     z-index: 1;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 50px;
+    padding-right: 40px;
 }
 
 /* SAM border - dark hexagon behind white SAM */
@@ -63,7 +63,7 @@
     width: 380px;
     height: 430px;
     background: #ffffff !important;
-    transform: translateX(60px);
+    transform: translateX(61px);
     z-index: 3;
     align-items: center;
     justify-content: flex-end;
