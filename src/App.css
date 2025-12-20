@@ -491,6 +491,10 @@ body {
   max-width: 100%;
   /* Allow full width of parent */
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 200px);
+  /* Adjust 200px based on header + padding space */
 }
 
 /* Progress Bar */
@@ -621,15 +625,18 @@ label {
 }
 
 .wizard-content {
-  min-height: 800px;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  /* Allow flex children to shrink */
 }
 
 .wizard-step {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Fix: If only one button (Next), push it to the right */
