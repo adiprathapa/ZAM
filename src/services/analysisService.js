@@ -42,7 +42,10 @@ export async function saveAnalysis(analysisData) {
         });
 
         if (!response.ok) {
-            throw new Error(`Error saving analysis: ${response.statusText}`);
+            const error = new Error(`Error saving analysis: ${response.statusText}`);
+            error.status = response.status;
+            error.statusText = response.statusText;
+            throw error;
         }
         return await response.json();
     } catch (error) {

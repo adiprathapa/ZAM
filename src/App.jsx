@@ -116,7 +116,17 @@ function App() {
       }
     } catch (err) {
       console.error("Analysis Failed:", err);
-      setAiError(err.message || "Unknown error occurred");
+      
+      // Check if the error is a 429 rate limit error from the server
+      if (err.status === 429 || err.message?.includes('429')) {
+        setAiError("Too many requests. You have exceeded your daily limit of 3 requests. Please try again tomorrow.");
+        setAiAnalysis(null);
+        setFinalData(null);
+        errorView = true;
+      } else {
+        setAiError(err.message || "Unknown error occurred");
+      }
+      
       // Still show results even if AI failed, just use local numbers
       const fallbackResult = calculateTopDown(data, {});
       setAssumptions(fallbackResult.assumptions);
@@ -172,7 +182,14 @@ function App() {
       setView('dashboard');
     } catch (err) {
       console.error("Save Error Details:", err);
-      alert(`Failed to save: ${err.message}. See console for details.`);
+      
+      // Check if the error is a 429 rate limit error
+      if (err.status === 429) {
+        setAiError("Too many requests. You have exceeded your daily limit of 3 requests. Please try again tomorrow.");
+        setView('ai-error');
+      } else {
+        alert(`Failed to save: ${err.message}. See console for details.`);
+      }
     } finally {
       setIsSaving(false);
     }

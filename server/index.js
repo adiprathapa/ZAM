@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { rateLimiter } from './middleware/rateLimiter.js';
 import industryRoutes from './routes/industries.js';
 import companyRoutes from './routes/companies.js';
 import constantRoutes from './routes/constants.js';
@@ -16,6 +17,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/zam';
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(rateLimiter); // Apply rate limiting to all routes
 
 // Database Connection (Cached for Serverless)
 let lastConnectError = null;
