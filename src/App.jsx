@@ -409,15 +409,6 @@ function App() {
                           style={{ width: '150px', textAlign: 'right' }}
                         />
                       </div>
-                      <input
-                        type="range"
-                        name="marketReach"
-                        min="1"
-                        max="100"
-                        step="1"
-                        value={assumptions.marketReach}
-                        onChange={handleSliderChange}
-                      />
                     </div>
 
                     <div className="slider-group">
@@ -435,15 +426,6 @@ function App() {
                           style={{ width: '150px', textAlign: 'right' }}
                         />
                       </div>
-                      <input
-                        type="range"
-                        name="marketShare"
-                        min="0.1"
-                        max="50"
-                        step="0.1"
-                        value={assumptions.marketShare}
-                        onChange={handleSliderChange}
-                      />
                     </div>
                   </div>
                 </section>

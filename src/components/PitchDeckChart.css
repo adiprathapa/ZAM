@@ -29,13 +29,10 @@
 .hexagon {
     position: absolute;
     display: flex;
-    align-items: center;
-    justify-content: center;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     transition: all 0.3s ease;
     box-sizing: border-box;
     padding: 20px;
-    filter: drop-shadow(-10px 0 10px rgba(0, 0, 0, 0.15));
 }
 
 /* TAM - Outermost hexagon (right/back) */
@@ -45,7 +42,9 @@
     background: #2c3e50;
     transform: translateX(100px);
     z-index: 1;
-    opacity: 0.95;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 50px;
 }
 
 /* SAM - Middle hexagon */
@@ -53,10 +52,26 @@
     width: 320px;
     height: 370px;
     background: #ffffff;
-    border: 3px solid #2c3e50;
-    color: #1a1a1a;
     transform: translateX(0px);
     z-index: 2;
+    align-items: center;
+    justify-content: center;
+    /* Create border effect using box-shadow since clip-path clips borders */
+    filter: drop-shadow(0 0 0 3px #2c3e50);
+    position: relative;
+}
+
+/* SAM border using pseudo-element */
+.sam-hex::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: #2c3e50;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    z-index: -1;
 }
 
 /* SOM - Innermost hexagon (left/front) */
@@ -66,6 +81,8 @@
     background: #ff4e1b;
     transform: translateX(-100px);
     z-index: 3;
+    align-items: center;
+    justify-content: center;
 }
 
 .hex-content {
@@ -74,7 +91,6 @@
     align-items: center;
     text-align: center;
     color: white;
-    width: 85%;
 }
 
 .sam-hex .hex-content {
@@ -85,7 +101,7 @@
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     font-family: inherit;
 }
 
@@ -103,7 +119,6 @@
     font-size: 1.3rem;
     font-weight: 600;
     font-family: inherit;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .chart-branding {
