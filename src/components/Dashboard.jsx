@@ -72,25 +72,25 @@ const Dashboard = ({ onNewAnalysis, onViewAnalysis }) => {
                     {Array.isArray(analyses) ? analyses.map((item) => (
                         <div key={item._id} className="analysis-card" onClick={() => onViewAnalysis(item)}>
                             <div className="card-header">
-                                <h3>{item.productName}</h3>
-                                <div className="card-actions">
-                                    <span className="date-badge">
+                                <div className="card-title-with-date">
+                                    <h3>{item.productName}</h3>
+                                    <span className="card-date">
                                         {new Date(item.createdAt).toLocaleDateString()}
                                     </span>
-                                    <button
-                                        className="btn-icon-delete"
-                                        onClick={(e) => handleDelete(e, item._id, item.productName)}
-                                        title="Delete Analysis"
-                                    >
-                                        Delete
-                                    </button>
                                 </div>
+                                <button
+                                    className="btn-icon-delete"
+                                    onClick={(e) => handleDelete(e, item._id, item.productName)}
+                                    title="Delete Analysis"
+                                >
+                                    Delete
+                                </button>
                             </div>
 
                             <div className="card-metrics">
                                 <div className="mini-metric">
-                                    <label>TAM</label>
-                                    <span>{formatCurrency(item.metrics?.tam || 0)}</span>
+                                    <label>SOM</label>
+                                    <span>{formatCurrency(item.metrics?.som || 0)}</span>
                                 </div>
                                 <div className="mini-metric">
                                     <label>Verdict</label>

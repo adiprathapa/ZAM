@@ -164,6 +164,77 @@ input[type=range]::-webkit-slider-thumb:hover {
   /* Solid orange for readability */
 }
 
+.card-title-with-date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.card-title-with-date h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--primary-color);
+}
+
+.card-date {
+  font-size: 0.875rem;
+  color: #999;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.card-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  flex: 1;
+}
+
+.mini-metric {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mini-metric label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 50px;
+}
+
+.mini-metric span {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.verdict-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  text-transform: capitalize;
+}
+
+.verdict-badge.conservative {
+  background: #065f46;
+  color: #34d399;
+}
+
+.verdict-badge.realistic {
+  background: #075985;
+  color: #38bdf8;
+}
+
+.verdict-badge.optimistic {
+  background: #92400e;
+  color: #f59e0b;
+}
+
 .section-header {
   display: flex;
   justify-content: space-between;
