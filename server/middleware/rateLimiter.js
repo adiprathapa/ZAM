@@ -11,6 +11,12 @@ const REQUESTS_PER_DAY = 3;
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 export function rateLimiter(req, res, next) {
+  // Only rate limit POST, PUT, DELETE operations (write operations)
+  // GET requests (reads) should not count towards the limit
+  if (req.method === 'GET') {
+    return next();
+  }
+
   const ip = req.ip || req.connection.remoteAddress || 'unknown';
   const now = Date.now();
 
@@ -47,7 +53,7 @@ export function rateLimiter(req, res, next) {
   if (ipData.requestCount > REQUESTS_PER_DAY) {
     return res.status(429).json({
       error: 'Too Many Requests',
-      message: `Rate limit exceeded: 3 requests per day allowed. Please try again after ${resetDate.toISOString()}`,
+      message: `Rate limit exceeded: 3 analyses per day allowed. Please try again after ${resetDate.toISOString()}`,
       resetTime: resetDate.toISOString(),
     });
   }
