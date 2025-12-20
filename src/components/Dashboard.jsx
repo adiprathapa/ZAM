@@ -16,10 +16,14 @@ const Dashboard = ({ onNewAnalysis, onViewAnalysis }) => {
     const loadAnalyses = async () => {
         try {
             setLoading(true);
+            setError(null); // Clear any previous errors
             const data = await fetchAnalyses();
-            setAnalyses(data);
+            setAnalyses(data || []);
         } catch (err) {
-            setError("Failed to load reports.");
+            // Silently fail and treat as empty portfolio
+            // This allows users to create new analyses even if loading fails
+            console.error("Failed to load analyses:", err);
+            setAnalyses([]);
         } finally {
             setLoading(false);
         }
@@ -52,8 +56,6 @@ const Dashboard = ({ onNewAnalysis, onViewAnalysis }) => {
                     </button>
                 </header>
             )}
-
-            {error && <div className="error-banner">{error}</div>}
 
             {analyses.length === 0 && !loading ? (
                 <div className="empty-state-hero">
