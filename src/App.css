@@ -621,7 +621,7 @@ label {
 }
 
 .wizard-content {
-  min-height: 900px;
+  min-height: 800px;
   display: flex;
   flex-direction: column;
 }
