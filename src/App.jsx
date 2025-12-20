@@ -40,8 +40,10 @@ function App() {
     setAssumptions(analysis.assumptions);
     setMetrics(analysis.metrics);
     setAiAnalysis(analysis.aiAnalysis);
-    // If logic steps aren't saved (currently they aren't in schema), just regenerate basic ones
-    setLogicSteps(["Loaded from saved report."]);
+    // Load saved logic steps, or show fallback message
+    setLogicSteps(analysis.logicSteps && analysis.logicSteps.length > 0 
+      ? analysis.logicSteps 
+      : ["Loaded from saved report."]);
     setView('results');
   };
 
@@ -170,7 +172,8 @@ function App() {
         inputs: { ...finalData, productName: nameToSave }, // Ensure it matches in inputs too
         metrics: metrics,
         assumptions: assumptions,
-        aiAnalysis: aiAnalysis || {} // Pass empty object if null to avoid complete omission if needed, though null is usually fine. Mongoose prefers objects for embedded schemas.
+        aiAnalysis: aiAnalysis || {}, // Pass empty object if null to avoid complete omission if needed, though null is usually fine. Mongoose prefers objects for embedded schemas.
+        logicSteps: logicSteps || [] // Save calculation logic
       };
 
       console.log("Saving Payload:", payload); // Debug log
@@ -367,7 +370,7 @@ function App() {
 
                     <div className="slider-group">
                       <div className="slider-header">
-                        <label>Average Price / ACV ({formatCurrency(assumptions.avgPrice)})</label>
+                        <label>Average Price / ACV</label>
                         <input
                           type="number"
                           name="avgPrice"

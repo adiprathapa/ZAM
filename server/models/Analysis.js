@@ -46,7 +46,9 @@ const analysisSchema = new mongoose.Schema({
         sanityCheck: String, // 'Conservative', 'Realistic', 'Optimistic'
         sanityCheckReason: String,
         isMock: Boolean
-    }
+    },
+    // Store the Calculation Logic Steps
+    logicSteps: [String]
 });
 
 const Analysis = mongoose.model('Analysis', analysisSchema);
