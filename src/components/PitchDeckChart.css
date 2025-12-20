@@ -39,7 +39,7 @@
     width: 480px;
     height: 540px;
     background: #2c3e50;
-    transform: translateX(50px);
+    transform: translateX(0px);
     z-index: 1;
     align-items: center;
     justify-content: flex-end;
@@ -56,7 +56,7 @@
     width: 360px;
     height: 410px;
     background: #ffffff !important;
-    transform: translateX(-7px);
+    transform: translateX(-57px);
     z-index: 2;
     align-items: center;
     justify-content: flex-end;
@@ -68,7 +68,7 @@
     width: 210px;
     height: 250px;
     background: #ff4e1b;
-    transform: translateX(-82px);
+    transform: translateX(-132px);
     z-index: 3;
     align-items: center;
     justify-content: center;
