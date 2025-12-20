@@ -37,37 +37,37 @@
 
 /* TAM - Outermost hexagon (right/back) */
 .tam-hex {
-    width: 420px;
-    height: 480px;
+    width: 500px;
+    height: 560px;
     background: #2c3e50;
-    transform: translateX(80px);
+    transform: translateX(120px);
     z-index: 1;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 45px;
+    padding-right: 50px;
 }
 
 /* SAM border - dark hexagon behind white SAM */
 .sam-hex-border {
     position: absolute;
-    width: 326px;
-    height: 376px;
+    width: 386px;
+    height: 436px;
     background: #2c3e50;
-    transform: translateX(-20px);
+    transform: translateX(-10px);
     z-index: 2;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
 /* SAM - Middle hexagon (white with border effect) */
 .sam-hex {
-    width: 320px;
-    height: 370px;
+    width: 380px;
+    height: 430px;
     background: #ffffff !important;
-    transform: translateX(-20px);
+    transform: translateX(-10px);
     z-index: 3;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 60px;
+    padding-right: 80px;
 }
 
 /* SOM - Innermost hexagon (left/front) */
@@ -75,7 +75,7 @@
     width: 220px;
     height: 260px;
     background: #ff4e1b;
-    transform: translateX(-120px);
+    transform: translateX(-140px);
     z-index: 4;
     align-items: center;
     justify-content: center;
