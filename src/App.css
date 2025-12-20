@@ -857,7 +857,7 @@ button {
 }
 
 .logic-list li {
-  font-family: 'Playfair Display', serif;
+  font-family: inherit;
   font-size: 1.1rem;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
@@ -881,7 +881,7 @@ button {
 }
 
 .zam-list li {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: inherit;
   font-size: 1rem;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
@@ -901,8 +901,8 @@ button {
   top: 0.2rem;
 }
 
-/* Specific overrides for Logic section to use Playfair */
+/* Specific overrides for Logic section */
 .report-card.primary .zam-list li {
-  font-family: 'Playfair Display', serif;
+  font-family: inherit;
   font-size: 1.1rem;
 }
