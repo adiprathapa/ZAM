@@ -47,31 +47,27 @@
     padding-right: 50px;
 }
 
-/* SAM - Middle hexagon */
+/* SAM border - dark hexagon behind white SAM */
+.sam-hex-border {
+    position: absolute;
+    width: 330px;
+    height: 380px;
+    background: #2c3e50;
+    transform: translateX(0px);
+    z-index: 2;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* SAM - Middle hexagon (white with border effect) */
 .sam-hex {
     width: 320px;
     height: 370px;
     background: #ffffff;
     transform: translateX(0px);
-    z-index: 2;
+    z-index: 3;
     align-items: center;
     justify-content: center;
-    /* Create border effect using box-shadow since clip-path clips borders */
-    filter: drop-shadow(0 0 0 3px #2c3e50);
-    position: relative;
-}
-
-/* SAM border using pseudo-element */
-.sam-hex::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    background: #2c3e50;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    z-index: -1;
+    padding-left: 80px;
 }
 
 /* SOM - Innermost hexagon (left/front) */
@@ -80,7 +76,7 @@
     height: 260px;
     background: #ff4e1b;
     transform: translateX(-100px);
-    z-index: 3;
+    z-index: 4;
     align-items: center;
     justify-content: center;
 }

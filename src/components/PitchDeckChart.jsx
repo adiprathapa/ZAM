@@ -15,7 +15,10 @@ const PitchDeckChart = ({ metrics, productName }) => {
                     </div>
                 </div>
 
-                {/* SAM - Middle */}
+                {/* SAM Border - dark hexagon behind white SAM */}
+                <div className="sam-hex-border"></div>
+
+                {/* SAM - Middle (white with border) */}
                 <div className="hexagon sam-hex">
                     <div className="hex-content">
                         <div className="hex-label">SAM</div>
