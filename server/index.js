@@ -7,6 +7,7 @@ import industryRoutes from './routes/industries.js';
 import companyRoutes from './routes/companies.js';
 import constantRoutes from './routes/constants.js';
 import analysisRoutes from './routes/analyses.js';
+import aiRoutes from './routes/ai.js';
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.use('/api/industries', industryRoutes);
 app.use('/api/comparables', companyRoutes);
 app.use('/api/constants', constantRoutes);
 app.use('/api/analyses', analysisRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health Check
 app.get('/api/health', (req, res) => {

@@ -1,135 +1,53 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export async function generateMarketNarrative(formData, metrics, logicSteps) {
-    // Check for API Key
-    const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-    if (!API_KEY) {
-        console.error("Missing VITE_GEMINI_API_KEY in .env file");
-        throw new Error("API Key missing. Please check .env configuration.");
-    }
+    try {
+        const response = await fetch(`${API_BASE_URL}/ai/analyze`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ formData, metrics, logicSteps }),
+        });
 
-    // Initialize GenAI
-    const genAI = new GoogleGenerativeAI(API_KEY);
+        const data = await response.json();
 
-    // Construct the Prompt Context
-    const context = `
-    Analyze this startup opportunity as a Venture Capital Analyst.
-    
-    PRODUCT_NAME: ${formData.productName}
-    VALUE_PROP: ${formData.valueProposition}
-    INDUSTRY: ${formData.industry}
-    CUSTOMER_TYPE: ${formData.customerType}
-    GEOGRAPHY: ${formData.geography}
-    PRICING: $${formData.price} (${formData.pricingModel})
-    
-    CALCULATED_MARKET_SIZE:
-    - TAM: $${metrics.tam.toLocaleString()}
-    - SAM: $${metrics.sam.toLocaleString()}
-    - SOM: $${metrics.som.toLocaleString()}
-    
-    CALCULATION_LOGIC_USED:
-    ${logicSteps.join('\n')}
-  `;
-
-    // Define the Prompt
-    const prompt = `
-    ${context}
-
-    TASK:
-    1. Critically evaluate the provided baseline market size.
-    2. Suggest MORE ACCURATE market sizing assumptions based on your knowledge of the specific industry and geography.
-    3. Provide a qualitative analysis.
-    
-    OUTPUT JSON FORMAT ONLY:
-    {
-      "suggestedAssumptions": {
-          "avgPrice": <Estimated annual value per customer in USD as a number>,
-          "totalAddressableUsers": <Estimated total potential customers in target geography as a number>,
-          "marketReach": <SAM percentage (0-100) as a number>,
-          "marketShare": <SOM percentage (0-100) as a number>
-      },
-      "executiveSummary": "2 punchy sentences summarizing the opportunity.",
-      "marketDrivers": ["Trend 1", "Trend 2", "Trend 3"],
-      "risks": ["Risk 1", "Risk 2"],
-      "sanityCheck": "One of: 'Conservative', 'Realistic', or 'Optimistic'",
-      "sanityCheckReason": "1 sentence explaining why based on the industry benchmarks."
-    }
-  `;
-
-    // Retry Logic with Model Fallback
-    const modelsToTry = [
-        'gemini-2.5-flash',
-        'gemini-2.5-pro',
-        'gemini-2.0-flash',
-        'gemini-1.5-flash'
-    ];
-    let errors = [];
-
-    for (const modelName of modelsToTry) {
-        let retries = 1; // Faster cycling
-        while (retries >= 0) {
-            try {
-                console.log(`🤖 Attempting AI with model: ${modelName} (v1beta)`);
-                // Forcing v1beta for newest models
-                const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1beta' });
-
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                const text = response.text();
-
-                const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
-                return JSON.parse(jsonStr);
-
-            } catch (error) {
-                console.warn(`AI Failed (${modelName}):`, error.message);
-                errors.push(`${modelName}: ${error.message}`);
-
-                if (error.message.includes('404') || error.message.includes('not found')) {
-                    break; // Move to next model
-                }
-
-                if (error.message.includes('429')) {
-                    await delay(1000);
-                }
-
-                retries--;
+        // Handle service unavailable (503) or other errors
+        if (!response.ok) {
+            if (data.isMock) {
+                // Return the mock data so UI can handle it gracefully
+                return data;
             }
+            throw new Error(data.message || 'AI analysis failed');
         }
+
+        return data;
+
+    } catch (error) {
+        console.error('AI Service Error:', error);
+        
+        // Return fallback mock response
+        return {
+            isMock: true,
+            userMessage: "AI service is temporarily unavailable. Please try again later.",
+            executiveSummary: "AI service is temporarily unavailable.",
+            suggestedAssumptions: {
+                avgPrice: metrics.tam / 100000,
+                totalAddressableUsers: metrics.tam / 500,
+                marketReach: 20,
+                marketShare: 2
+            },
+            marketDrivers: [
+                "Cloud Adoption Trends",
+                "AI Integration Growth", 
+                "Remote Work Expansion"
+            ],
+            risks: [
+                "Market Competition",
+                "Regulatory Changes"
+            ],
+            sanityCheck: "Demo",
+            sanityCheckReason: "This is a placeholder analysis because the AI service is temporarily unavailable."
+        };
     }
-
-    const lastError = errors[0]; // Show the error from the first (most desired) model
-
-    // FALLBACK: If all AI attempts fail, return a friendly user-facing message
-    // so the UI can show a simple instruction and avoid technical details.
-    console.warn("All AI models failed. Switching to DEMO MODE.", { errors });
-    return {
-        isMock: true, // Flag to show in UI
-        // A short message intended for end-users (non-technical)
-        userMessage: "Gemini is temporarily unavailable. Please try again tomorrow.",
-        // Keep a brief, non-technical executive summary for displays that expect it
-        executiveSummary: "Gemini is temporarily unavailable. Please try again tomorrow.",
-        // Provide a simple demo analysis so the UI remains functional
-        suggestedAssumptions: {
-            avgPrice: metrics.tam / 100000,
-            totalAddressableUsers: metrics.tam / 500,
-            marketReach: 20,
-            marketShare: 2
-        },
-        marketDrivers: [
-            "Demonstration Driver 1: Cloud Adoption",
-            "Demonstration Driver 2: AI Integration",
-            "Demonstration Driver 3: Remote Work Trends"
-        ],
-        risks: [
-            "API Key Configuration Issue",
-            "Verify Google Cloud Billing is enabled (if using Pro)",
-            "Check API Quotas"
-        ],
-        sanityCheck: "Demo",
-        sanityCheckReason: "This is a placeholder analysis because the live AI service is unreachable.",
-        // Developer-only field: include the last error for debugging in logs (UI should ignore)
-        _debugError: lastError || errors.join(' | ')
-    };
 }
