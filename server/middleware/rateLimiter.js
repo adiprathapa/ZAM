@@ -11,9 +11,10 @@ const REQUESTS_PER_DAY = 3;
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 export function rateLimiter(req, res, next) {
-  // Only rate limit POST, PUT, DELETE operations (write operations)
+  // Only rate limit POST operations (creating/saving new analyses)
   // GET requests (reads) should not count towards the limit
-  if (req.method === 'GET') {
+  // DELETE requests should not count towards the limit (cleanup shouldn't use quota)
+  if (req.method === 'GET' || req.method === 'DELETE') {
     return next();
   }
 
