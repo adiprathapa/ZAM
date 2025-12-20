@@ -620,6 +620,18 @@ label {
   border-top: 1px solid var(--border);
 }
 
+.wizard-content {
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Fix: If only one button (Next), push it to the right */
 .wizard-actions button:only-child {
   margin-left: auto;

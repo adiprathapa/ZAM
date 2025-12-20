@@ -26,16 +26,16 @@ const connectDB = async () => {
     if (mongoose.connection.readyState === 1) return;
 
     try {
-        console.log('🔄 Connecting to MongoDB...');
+        console.log('Connecting to MongoDB...');
         await mongoose.connect(MONGODB_URI, {
             serverSelectionTimeoutMS: 5000,
             connectTimeoutMS: 10000,
         });
-        console.log('✅ MongoDB Connected');
+        console.log('MongoDB Connected');
         lastConnectError = null;
     } catch (err) {
         lastConnectError = `${err.name}: ${err.message}`;
-        console.error('❌ MongoDB Connection Error:', err);
+        console.error('MongoDB Connection Error:', err);
     }
 };
 
