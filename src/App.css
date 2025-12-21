@@ -893,7 +893,8 @@ button {
 
 .export-preview {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   justify-content: center;
   padding: 2rem 0;
@@ -907,31 +908,36 @@ button {
   transform: scale(0.85);
   transform-origin: center top;
   margin-bottom: -60px;
+  flex-shrink: 0;
   /* Offset the scale transform empty space */
 }
 
 @media (max-width: 900px) {
   .export-preview .pitch-deck-container {
-    transform: scale(0.55);
-    margin-bottom: -180px;
+    transform: scale(0.65);
+    transform-origin: center top;
+    margin-bottom: -150px;
   }
 }
 
 @media (max-width: 600px) {
-  .export-preview .pitch-deck-container {
-    transform: scale(0.45);
-    margin-bottom: -210px;
+  .export-preview {
+    justify-content: flex-start;
+    padding: 1rem;
   }
 
-  .export-preview {
-    padding: 1rem 0;
+  .export-preview .pitch-deck-container {
+    transform: scale(0.5);
+    transform-origin: left top;
+    margin-bottom: -280px;
+    margin-left: 0;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .export-preview .pitch-deck-container {
-    transform: scale(0.38);
-    margin-bottom: -250px;
+    transform: scale(0.42);
+    margin-bottom: -320px;
   }
 }
 
