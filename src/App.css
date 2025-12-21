@@ -512,6 +512,28 @@ body {
     /* Reduce inner padding on mobile */
   }
 
+  /* Metric cards mobile */
+  .metric-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .metric-card {
+    padding: 1.25rem;
+  }
+
+  .metric-card h3 {
+    font-size: 0.875rem;
+  }
+
+  .metric-value {
+    font-size: 1.75rem;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
+  }
+
   /* Wizard step text sizing for mobile */
   .wizard-step h2 {
     font-size: 1.25rem;
@@ -890,15 +912,26 @@ button {
 
 @media (max-width: 900px) {
   .export-preview .pitch-deck-container {
-    transform: scale(0.6);
-    margin-bottom: -150px;
+    transform: scale(0.55);
+    margin-bottom: -180px;
   }
 }
 
 @media (max-width: 600px) {
   .export-preview .pitch-deck-container {
-    transform: scale(0.4);
-    margin-bottom: -240px;
+    transform: scale(0.45);
+    margin-bottom: -210px;
+  }
+
+  .export-preview {
+    padding: 1rem 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .export-preview .pitch-deck-container {
+    transform: scale(0.38);
+    margin-bottom: -250px;
   }
 }
 
