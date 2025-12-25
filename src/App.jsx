@@ -15,7 +15,6 @@ function App() {
 
   // AI State
   const [aiAnalysis, setAiAnalysis] = useState(null);
-  const [loadingAi, setLoadingAi] = useState(false); // This state is no longer used as `isAnalyzing` covers it
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [aiError, setAiError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -27,9 +26,6 @@ function App() {
     marketReach: 25, // % for SAM
     marketShare: 5   // % for SOM
   });
-
-  // Store original assumptions for reset functionality
-  const [originalAssumptions, setOriginalAssumptions] = useState(null);
 
   const [metrics, setMetrics] = useState({ tam: 0, sam: 0, som: 0 });
   const [logicSteps, setLogicSteps] = useState([]);
@@ -104,7 +100,6 @@ function App() {
             marketShare: aiResult.suggestedAssumptions.marketShare || result.assumptions.marketShare
           };
           setAssumptions(newAssumptions);
-          setOriginalAssumptions(newAssumptions); // Store original for reset
 
           setLogicSteps([
             "AI Refined: Adjusting based on deep market analysis...",
