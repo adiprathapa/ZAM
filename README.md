@@ -43,12 +43,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 3. **Configure environment variables**
    
    Create a `.env` file in the root directory:
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/zam
-   GOOGLE_API_KEY=your_google_gemini_api_key
-   PORT=5001
-   ```
-
+  
 4. **Seed the database** (optional - loads industry benchmarks)
    ```bash
    npm run seed
