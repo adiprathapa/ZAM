@@ -2,7 +2,7 @@
 
 ZAM helps founders and investors map markets and size opportunities with the precision of a VC. Input your venture details through a guided wizard, and get AI powered TAM/SAM/SOM analysis with actionable insights.
 
-## Features
+## ✨ Features
 
 - **Guided Analysis Wizard** - 4-step wizard to capture product, target market, go-to-market, and competitive context
 - **TAM/SAM/SOM Calculation** - Automated market sizing using industry benchmarks and intelligent heuristics
@@ -11,7 +11,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 - **Pitch Deck Charts** - Export-ready visualizations for presentations
 - **Real-time Fine-tuning** - Adjust assumptions and see instant recalculations
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Frontend**: React 18, Vite
 - **Backend**: Express.js, Node.js
@@ -19,7 +19,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 - **AI**: Google Generative AI (Gemini)
 - **Deployment**: Vercel
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -43,7 +43,12 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 3. **Configure environment variables**
    
    Create a `.env` file in the root directory:
-  
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/zam
+   GOOGLE_API_KEY=your_google_gemini_api_key
+   PORT=5001
+   ```
+
 4. **Seed the database** (optional - loads industry benchmarks)
    ```bash
    npm run seed
