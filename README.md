@@ -2,7 +2,7 @@
 
 ZAM helps founders and investors map markets and size opportunities with the precision of a VC. Input your venture details through a guided wizard, and get AI powered TAM/SAM/SOM analysis with actionable insights.
 
-## ✨ Features
+##  Features
 
 - **Guided Analysis Wizard** - 4-step wizard to capture product, target market, go-to-market, and competitive context
 - **TAM/SAM/SOM Calculation** - Automated market sizing using industry benchmarks and intelligent heuristics
@@ -11,7 +11,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 - **Pitch Deck Charts** - Export-ready visualizations for presentations
 - **Real-time Fine-tuning** - Adjust assumptions and see instant recalculations
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend**: React 18, Vite
 - **Backend**: Express.js, Node.js
@@ -19,7 +19,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 - **AI**: Google Generative AI (Gemini)
 - **Deployment**: Vercel
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
