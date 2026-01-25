@@ -361,7 +361,7 @@ function App() {
 
                   <div className="report-card">
                     <h3>Fine Tune Assumptions</h3>
-                    <p className="section-note">Adjust these parameters to see real-time impact on market sizing.</p>
+                    <p className="section-note">Adjust these parameters to see their impact on market sizing.</p>
 
                     <div className="slider-group">
                       <div className="slider-header">
