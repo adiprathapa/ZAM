@@ -67,7 +67,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 | `npm run seed` | Seed database with reference data |
 | `npm run lint` | Run ESLint |
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── public/              # Static assets
