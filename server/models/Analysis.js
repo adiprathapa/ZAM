@@ -45,7 +45,13 @@ const analysisSchema = new mongoose.Schema({
         risks: [String],
         sanityCheck: String, // 'Conservative', 'Realistic', 'Optimistic'
         sanityCheckReason: String,
-        isMock: Boolean
+        isMock: Boolean,
+        grounded: Boolean,
+        sources: [{
+            source: String,
+            type: String,
+            similarity: Number
+        }]
     },
     // Store the Calculation Logic Steps
     logicSteps: [String]

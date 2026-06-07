@@ -318,6 +318,18 @@ function App() {
                         </div>
                       </div>
 
+                      {aiAnalysis.sources?.length > 0 && (
+                        <div className="report-card">
+                          <h3>Grounded Sources</h3>
+                          <p className="section-note">Retrieved from the ZAM knowledge base and used to ground this analysis.</p>
+                          <ul className="zam-list">
+                            {aiAnalysis.sources.map((s, i) => (
+                              <li key={i}>{s.source} <span style={{ opacity: 0.6 }}>({(s.similarity * 100).toFixed(0)}% match)</span></li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
                       {/* 3. Pitch Deck Visual Export */}
                       <div className="report-card primary export-section">
                         <div className="export-header">

@@ -1,5 +1,6 @@
 import express from 'express';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { retrieveContext, buildRetrievalQuery } from '../rag/retriever.js';
 
 const router = express.Router();
 
@@ -28,24 +29,44 @@ router.post('/analyze', async (req, res) => {
         // Initialize GenAI
         const genAI = new GoogleGenerativeAI(API_KEY);
 
+        let retrieved = { results: [], grounded: false };
+        try {
+            const retrievalQuery = buildRetrievalQuery(formData, metrics);
+            retrieved = await retrieveContext(retrievalQuery, {
+                industryKey: formData.industry,
+                topK: 5
+            });
+        } catch (ragError) {
+            console.warn('RAG retrieval failed, proceeding ungrounded:', ragError.message);
+        }
+
+        const groundingBlock = retrieved.results.length
+            ? retrieved.results
+                .map((r, i) => `[${i + 1}] (${r.source}) ${r.text}`)
+                .join('\n')
+            : 'No grounding data available.';
+
         // Construct the Prompt Context
         const context = `
         Analyze this startup opportunity as a Venture Capital Analyst.
-        
+
         PRODUCT_NAME: ${formData.productName}
         VALUE_PROP: ${formData.valueProposition}
         INDUSTRY: ${formData.industry}
         CUSTOMER_TYPE: ${formData.customerType}
         GEOGRAPHY: ${formData.geography}
         PRICING: $${formData.price} (${formData.pricingModel})
-        
+
         CALCULATED_MARKET_SIZE:
         - TAM: $${metrics.tam.toLocaleString()}
         - SAM: $${metrics.sam.toLocaleString()}
         - SOM: $${metrics.som.toLocaleString()}
-        
+
         CALCULATION_LOGIC_USED:
         ${(logicSteps || []).join('\n')}
+
+        RETRIEVED_KNOWLEDGE_BASE (industry benchmarks, comparable companies, and ZAM sizing methodology — ground your analysis in these facts and prefer them over general assumptions):
+        ${groundingBlock}
         `;
 
         // Define the Prompt
@@ -53,8 +74,8 @@ router.post('/analyze', async (req, res) => {
         ${context}
 
         TASK:
-        1. Critically evaluate the provided baseline market size.
-        2. Suggest MORE ACCURATE market sizing assumptions based on your knowledge of the specific industry and geography.
+        1. Critically evaluate the provided baseline market size against the RETRIEVED_KNOWLEDGE_BASE.
+        2. Suggest MORE ACCURATE market sizing assumptions, grounded in the retrieved industry benchmarks and comparable companies above. Cite specific comparables or benchmarks where relevant.
         3. Provide a qualitative analysis.
         
         OUTPUT JSON FORMAT ONLY:
@@ -86,7 +107,7 @@ router.post('/analyze', async (req, res) => {
             let retries = 1;
             while (retries >= 0) {
                 try {
-                    console.log(`🤖 Attempting AI with model: ${modelName}`);
+                    console.log(`Attempting AI with model: ${modelName}`);
                     const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1beta' });
 
                     const result = await model.generateContent(prompt);
@@ -95,7 +116,14 @@ router.post('/analyze', async (req, res) => {
 
                     const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
                     const parsed = JSON.parse(jsonStr);
-                    
+
+                    parsed.grounded = retrieved.grounded;
+                    parsed.sources = retrieved.results.map((r) => ({
+                        source: r.source,
+                        type: r.type,
+                        similarity: r.similarity
+                    }));
+
                     return res.json(parsed);
 
                 } catch (error) {
