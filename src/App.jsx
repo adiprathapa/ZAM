@@ -224,7 +224,7 @@ function App() {
           <div className="loading-overlay">
             <div className="loading-spinner"></div>
             <div className="loading-text">Analyzing market data...</div>
-            <div style={{ marginTop: '10px', color: '#94a3b8' }}>Consulting Gemini Flash</div>
+            <div style={{ marginTop: '10px', color: '#94a3b8' }}>Consulting AI Analyst</div>
           </div>
         ) : (
           <>
@@ -355,7 +355,7 @@ function App() {
                         <div style={{ color: '#ef4444', marginTop: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', padding: '0.5rem', borderRadius: '4px' }}>
                           <strong>Error Details:</strong> {aiError}
                           <br />
-                          <small>Possible Fix: Check .env file for VITE_GEMINI_API_KEY</small>
+                          <small>Possible Fix: Check that GROQ_API_KEY is set on the server</small>
                         </div>
                       )}
                     </div>

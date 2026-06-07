@@ -1,5 +1,4 @@
 import express from 'express';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { retrieveContext, buildRetrievalQuery } from '../rag/retriever.js';
 
 const router = express.Router();
@@ -17,17 +16,14 @@ router.post('/analyze', async (req, res) => {
         }
 
         // Check for API Key (server-side only)
-        const API_KEY = process.env.GEMINI_API_KEY;
-        if (!API_KEY) {
-            console.error("Missing GEMINI_API_KEY in environment");
-            return res.status(500).json({ 
+        const GROQ_API_KEY = process.env.GROQ_API_KEY;
+        if (!GROQ_API_KEY) {
+            console.error("Missing GROQ_API_KEY in environment");
+            return res.status(500).json({
                 message: 'AI service not configured',
-                isMock: true 
+                isMock: true
             });
         }
-
-        // Initialize GenAI
-        const genAI = new GoogleGenerativeAI(API_KEY);
 
         let retrieved = { results: [], grounded: false };
         try {
@@ -96,10 +92,8 @@ router.post('/analyze', async (req, res) => {
 
         // Retry Logic with Model Fallback
         const modelsToTry = [
-            'gemini-2.5-flash',
-            'gemini-2.5-pro',
-            'gemini-2.0-flash',
-            'gemini-1.5-flash'
+            'llama-3.3-70b-versatile',
+            'llama-3.1-8b-instant'
         ];
         let errors = [];
 
@@ -108,14 +102,31 @@ router.post('/analyze', async (req, res) => {
             while (retries >= 0) {
                 try {
                     console.log(`Attempting AI with model: ${modelName}`);
-                    const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1beta' });
+                    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${GROQ_API_KEY}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model: modelName,
+                            messages: [
+                                { role: 'system', content: 'You are a venture capital analyst. Respond only with valid JSON matching the requested schema.' },
+                                { role: 'user', content: prompt }
+                            ],
+                            response_format: { type: 'json_object' },
+                            temperature: 0.4
+                        })
+                    });
 
-                    const result = await model.generateContent(prompt);
-                    const response = await result.response;
-                    const text = response.text();
+                    if (!groqResponse.ok) {
+                        const errText = await groqResponse.text();
+                        throw new Error(`${groqResponse.status} ${errText}`);
+                    }
 
-                    const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
-                    const parsed = JSON.parse(jsonStr);
+                    const data = await groqResponse.json();
+                    const text = data.choices?.[0]?.message?.content || '';
+                    const parsed = JSON.parse(text);
 
                     parsed.grounded = retrieved.grounded;
                     parsed.sources = retrieved.results.map((r) => ({
@@ -130,10 +141,6 @@ router.post('/analyze', async (req, res) => {
                     console.warn(`AI Failed (${modelName}):`, error.message);
                     errors.push(`${modelName}: ${error.message}`);
 
-                    if (error.message.includes('404') || error.message.includes('not found')) {
-                        break;
-                    }
-
                     if (error.message.includes('429')) {
                         await delay(1000);
                     }
@@ -147,8 +154,8 @@ router.post('/analyze', async (req, res) => {
         console.warn("All AI models failed.", { errors });
         return res.status(503).json({
             isMock: true,
-            userMessage: "Gemini is temporarily unavailable. Please try again later.",
-            executiveSummary: "Gemini is temporarily unavailable. Please try again later.",
+            userMessage: "The AI service is temporarily unavailable. Please try again later.",
+            executiveSummary: "The AI service is temporarily unavailable. Please try again later.",
             suggestedAssumptions: {
                 avgPrice: metrics.tam / 100000,
                 totalAddressableUsers: metrics.tam / 500,
