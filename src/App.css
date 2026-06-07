@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 html, body {
   overscroll-behavior: none;
 }
@@ -35,15 +33,15 @@ html, body {
 }
 
 .metric-card.tam {
-  border-color: #818cf8;
+  border-color: var(--primary-color);
 }
 
 .metric-card.sam {
-  border-color: #34d399;
+  border-color: var(--primary-color);
 }
 
 .metric-card.som {
-  border-color: #fbbf24;
+  border-color: var(--primary-color);
 }
 
 .metric-card h3 {
@@ -136,7 +134,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.se.card-header {
+.card-header {
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -328,19 +326,11 @@ input[type=range]::-webkit-slider-thumb:hover {
   text-transform: uppercase;
 }
 
-.badge.conservative {
-  background: #065f46;
-  color: #34d399;
-}
-
-.badge.realistic {
-  background: #075985;
-  color: #38bdf8;
-}
-
+.badge.conservative,
+.badge.realistic,
 .badge.optimistic {
-  background: #92400e;
-  color: #fbbf24;
+  background: rgba(255, 83, 27, 0.12);
+  color: var(--primary-color);
 }
 
 /* Skeleton */
@@ -351,23 +341,6 @@ input[type=range]::-webkit-slider-thumb:hover {
   margin-bottom: 0.75rem;
   border-radius: 0.25rem;
   animation: pulse 1.5s infinite;
-}
-
-.logic-block {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: var(--surface-light);
-  /* Light gray background */
-  border-radius: 0.5rem;
-}
-
-.logic-list {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: var(--text-primary);
-  /* Dark text for readability */
-  font-size: 1.05rem;
-  line-height: 1.6;
 }
 
 /* Loading Overlay */
@@ -413,17 +386,6 @@ input[type=range]::-webkit-slider-thumb:hover {
   }
 }
 
-@keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
 
 :root {
   /* Insight Partners Palette */
@@ -816,6 +778,7 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
+  font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
@@ -844,7 +807,7 @@ button {
 }
 
 .btn-analyze {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--primary-color);
 }
 
 /* Animation */
@@ -946,44 +909,6 @@ button {
   }
 }
 
-/* Calculation Logic Styling */
-.logic-block {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.logic-block h4 {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
-}
-
-.logic-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.logic-list li {
-  font-family: inherit;
-  font-size: 1.1rem;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
-  padding-left: 1.5rem;
-  position: relative;
-  line-height: 1.6;
-}
-
-.logic-list li::before {
-  content: "-";
-  position: absolute;
-  left: 0;
-  color: var(--primary-color);
-  font-weight: bold;
-}
 /* Global Branded List Styling */
 .zam-list {
   list-style: none;

@@ -241,8 +241,8 @@ function App() {
 
             {view === 'ai-error' && (
               <div className="api-error-screen" style={{ padding: '4rem', textAlign: 'center' }}>
-                <h2 style={{ color: '#dc2626', marginBottom: '1rem' }}>Google API Limit Reached</h2>
-                <p style={{ color: '#334155', marginBottom: '1.5rem' }}>{aiError || 'Google API limit has been reached. Please try again tomorrow.'}</p>
+                <h2 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>Daily Limit Reached</h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{aiError || 'You have reached the daily analysis limit. Please try again tomorrow.'}</p>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <button className="btn-primary" onClick={() => {
                     setAiError(null);
@@ -289,9 +289,9 @@ function App() {
                   <div className="section-header">
                     <h2>AI Market Analyst</h2>
                     {aiAnalysis?.isMock ? (
-                      <span className="badge" style={{ background: '#f59e0b', color: '#fff' }}>Demo Mode (API Error)</span>
+                      <span className="badge" style={{ background: 'var(--surface-light)', color: 'var(--text-secondary)' }}>Demo Mode (API Error)</span>
                     ) : (
-                      <span className="badge" style={{ background: '#10b981', color: '#fff' }}>Live Analysis</span>
+                      <span className="badge" style={{ background: 'var(--primary-color)', color: '#fff' }}>Live Analysis</span>
                     )}
                   </div>
 
