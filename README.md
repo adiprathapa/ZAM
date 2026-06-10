@@ -8,7 +8,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 
 - **Guided Analysis Wizard** - 4-step wizard to capture product, target market, go-to-market, and competitive context
 - **TAM/SAM/SOM Calculation** - Automated market sizing using industry benchmarks and intelligent heuristics
-- **AI-Powered Insights** - Google Gemini integration for executive summaries, market drivers, risks, and sanity checks
+- **AI-Powered Insights** - Groq powered analysis grounded with RAG over real industry benchmarks for executive summaries, market drivers, risks, and sanity checks
 - **Venture Portfolio** - Save, view, and manage multiple market analyses
 - **Pitch Deck Charts** - Export-ready visualizations for presentations
 - **Real-time Fine-tuning** - Adjust assumptions and see instant recalculations
@@ -18,7 +18,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 - **Frontend**: React 18, Vite
 - **Backend**: Express.js, Node.js
 - **Database**: MongoDB (Mongoose ODM)
-- **AI**: Google Generative AI (Gemini)
+- **AI**: Groq (RAG with BM25 retrieval)
 - **Deployment**: Vercel
 
 ##  Getting Started
@@ -27,7 +27,7 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 
 - Node.js 18+
 - MongoDB (local or Atlas)
-- Google Generative AI API key
+- Groq API key
 
 ### Installation
 
