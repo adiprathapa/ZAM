@@ -2,6 +2,8 @@
 
 ZAM helps founders and investors map markets and size opportunities with the precision of a VC. Input your venture details through a guided wizard, and get AI powered TAM/SAM/SOM analysis with actionable insights.
 
+**[Try it live →](https://zam-nu.vercel.app)**
+
 ##  Features
 
 - **Guided Analysis Wizard** - 4-step wizard to capture product, target market, go-to-market, and competitive context
@@ -31,8 +33,8 @@ ZAM helps founders and investors map markets and size opportunities with the pre
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/zam.git
-   cd zam
+   git clone https://github.com/adiprathapa/ZAM.git
+   cd ZAM
    ```
 
 2. **Install dependencies**
@@ -98,4 +100,3 @@ The calculation engine factors in:
 - Company size targets
 - Industry benchmarks
 - Pricing model
-
